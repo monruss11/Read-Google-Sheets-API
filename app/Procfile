@@ -1,1 +1,1 @@
-web: gunicorn -w -4 -k uvicorn.workers.UvicornWorker main:app
+web: gunicorn -b :5000 --access-logfile - --error-logfile - build:app
