@@ -1,0 +1,58 @@
+!!!
+  <input type="number" id="row_num" name="row_num"
+    placeholder="max {{data_page.row_count}}" min="1" max={{data_page.row_count}} >
+ <label> {{data_page.row_count}} , {{data_page.col_count}}</label>
+
+
+
+<!--            {% if item.key=='Position'  %}-->
+<!--            {% endif %}-->
+
+
+<!--        {% for item in data.result %}-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ url_for('static', path='/css/mystyle.css') }}" rel="stylesheet">
+</head>
+<body>
+  <table>
+    <tr>
+        <th>Position</th>
+        <th>Description</th>
+        <th>Qty</th>
+    </tr>
+    <tr>
+            {% for item in data.result %}
+
+                    {% for item_l in item['Position'] %}
+                        <tr> <td>{{  item_l }}  </td> </tr>
+                    {% endfor %}
+
+
+                    {% for item_l in item['Description'] %}
+                        <tr> <td>{{  item_l }}</td> </tr>
+                    {% endfor %}
+
+
+                    {% for item_l in item['Qty'] %}
+                        <tr> <td>{{  item_l }}</td> </tr>
+                    {% endfor %}
+
+            {% endfor %}
+
+    </tr>
+  </table>
+ <!--{{data.result}}-->
+</body>
+</html>
+
+rel="stylesheet"
+
+tr td:last-child {
+            width: 1%;
+            white-space: nowrap;
+
