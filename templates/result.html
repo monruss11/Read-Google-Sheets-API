@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <title> {{data_page.title}}</title>
+<!--    <link href="mystyle.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/mystyle.css') }}" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<style>
+head { color: #ffaa80; }
+body {
+            width:100%;
+            height:100%;
+            position: top;
+            margin: 5;
+            padding-bottom: 10px;
+            padding-left:20px;
+            box-sizing: border-box;
+            vertical-align: top;
+            color: green;
+            overflow-x: auto; 
+            white-space: nowrap;
+}
+        table {
+
+          width: 100%;
+          font-family: arial, sans-serif;
+          padding-left:20px; padding-right:20px;
+          vertical-align:top;
+        }
+        p.pagename {  font-family: Arial, Helvetica, sans-serif; font-size:55px; }
+        tr:nth-child(even) { background-color: #dddddd; }
+        td {
+          border-bottom: 3px solid #170d0d;
+          border: 3px solid #dddddd;
+          vertical-align: top;
+          text-align: left;
+          padding: 5px;
+        }
+        p.pagename,p {  font-family: Arial, Helvetica, sans-serif; font-size:45px; }
+        p{
+            font-size:15px;
+            min-height:17.6px;
+        }
+        label {
+            color:#ffaa80;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:25px;
+        }
+        dd,dt {
+            color:#ffaa80;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:15px;
+        }
+        .key{ color:#0080ff; font-size:21px}
+        .button {
+              background-color: #4CAF50;
+              border: none;
+              color: white;
+              padding: 15px 32px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              cursor: pointer;
+        }
+        #myBtn {
+          display: none;
+          position: fixed;
+          bottom: 20px;
+          right: 30px;
+          z-index: 99;
+          font-size: 18px;
+          border: none;
+          outline: none;
+          background-color: green;
+          color: white;
+          cursor: pointer;
+          padding: 15px;
+          border-radius: 4px;
+        }
+    #myBtn:hover { background-color: blue; }
+    .siteDescription {
+    display: -moz-box; /* Firefox*/
+    display: -webkit-box; /* Chrome */
+    display: -ms-flexbox; /* IE 10 */
+    display: flexbox;
+    flex-direction: row;
+    /* flex-align:start; */
+    width: 95%;
+    height: 150px;
+    }
+
+</style>
+<body>
+
+
+<p class="pagename"> {{data_page.title}} </p>
+<a href="/" ><!--    <input type="submit" />--> <button class="button">Back</button> </a>
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+{% if data_page.doc_lang=='Hebrew' %}
+    <style> td { text-align: right; } </style>
+{% endif %}
+    <div class="scroll">
+{% if data_page.check_count==0 %}
+    {% set i=0  %}
+    <table>
+        <tr>
+            {% for key in result %}
+                <td>
+                    <h3> {{ key[0] }} </h3>
+                </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for key in result %}
+                {% set list=key[1:] %}
+                <td>
+                    {% for value in list %}
+                    <p>  {{ value }} </p>
+                    {% endfor %}
+                </td>
+            {% endfor %}
+        </tr>
+    </table>
+{% endif %}
+
+{% if data_page.check_count==1 %}
+    <dl>
+        <dt> Row number {{ data_page.row_num }} </dt> <br><br>
+        {% for dict in result %}
+
+            <dd><span class="key"> {{ dict[0]}} : {{ dict[1] }} </span> </dd>
+        {% endfor %}
+    </dl>
+{% endif %}
+
+{% if data_page.check_count==2 %}
+    <dl>
+        <dt> Column number {{ data_page.col_num }} </dt> <br><br>
+
+        <dd><span class="key"> {{ result[0] }}</span></dd>
+        {% set list=result[1:] %}
+        {% for value in list %}
+            <dd> {{ value }} </dd>
+        {% endfor %}
+    </dl>
+{% endif %}
+
+
+{% if data_page.check_count==3 %}
+    <dl>
+        <p> Row number {{ data_page.row_num }} Column number {{ data_page.col_num }} </p>
+        <dd><span class="key"> Value : </span> {{ result }}</dd>
+    </dl>
+{% endif %}
+<!--  !!!!!! redirect by Button/-->
+</div>
+<a href="/Condishions" >
+<!--    <input type="submit" />-->
+    <button class="button" >Back</button>
+</a>
+<!--<form name="go" method="post" action="/" enctype="multi-part/form-data">-->
+<!--    <input type="submit" class="button" value="Back">-->
+<!--</form>-->
+
+<script>
+//Get the button
+var mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
+</body>
+</html>
