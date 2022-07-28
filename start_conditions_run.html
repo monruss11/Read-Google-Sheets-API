@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> {{data_page.title}} </title>
+    <link href={{ url_for( 'static', path='/css/mystyle.css') }} rel="stylesheet">
+</head>
+
+<body>
+    <p class="pagename" > {{data_page.title}} </p>
+    <div >
+        <form name="go" method="post" action="/api/v1/result" enctype="multi-part/form-data">
+            <label for="row_num">Row number:</label><br>
+
+            <input type="number" id="row_num" name="row_num" min="1" max="{{ data_page.row_count}}"
+                    placeholder="max {{ data_page.row_count}}"><br>
+            <label for="column_num">Column number:</label><br>
+            <input type="number" id="col_num" name="col_num"  min="1" max="{{ data_page.col_count }}"
+                    placeholder="max {{ data_page.col_count}}"><br><br>
+
+            <input type="submit" class="button" value="Submit">
+            <input type="reset" class="button">
+
+        </form>
+    </div>
+
+<a href="/"><button class="button">Back</button></a>
+
+</body>
+</html>
+
