@@ -8,6 +8,7 @@ import os
 import gspread
 from typing import Optional,Dict
 import read_write_module as rw
+from deta import Deta
 
 
 
@@ -15,6 +16,11 @@ app=FastAPI()
 path=os.path.dirname(__file__)
 templates = Jinja2Templates(directory=f'{path}/templates')
 app.mount('/static', StaticFiles(directory='static'), name='static')
+
+# 2) initialize with a project key
+deta = Deta("b0mnv9cp_uRcyX9yEJn3soXQJYyadu3b3rQoprw2e")
+# 3) create and use as many DBs as you want!
+users = deta.Base("users")
 
 @app.get('/', response_class=HTMLResponse)
 async def home(request: Request ):
