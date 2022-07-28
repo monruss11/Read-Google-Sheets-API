@@ -8,9 +8,6 @@ import os
 import gspread
 from typing import Optional,Dict
 import read_write_module as rw
-from deta import Deta
-
-
 
 app=FastAPI()
 path=os.path.dirname(__file__)
