@@ -18,7 +18,7 @@ def make_googlesheets_client(url=None,lang=None):
   else:
     # READ CREDIDS FROM FILE
     #creds_json = os.path.dirname(__file__) + '/credentials.json'
-    creds_json ='credentials.json'
+    creds_json ='/credentials.json'
     gc = gspread.service_account(filename= creds_json)
 #Check for valid URL !!!
     try:
